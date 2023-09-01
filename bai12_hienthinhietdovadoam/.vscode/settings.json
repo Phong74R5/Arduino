@@ -1,0 +1,28 @@
+{
+    "sqltools.connections": [
+        {
+            "previewLimit": 50,
+            "server": "localhost",
+            "port": 5432,
+            "driver": "PostgreSQL",
+            "name": "DEMOSPRINGBOOT",
+            "database": "student",
+            "username": "postgres",
+            "password": "123456"
+        },
+        {
+            "mysqlOptions": {
+                "authProtocol": "default",
+                "enableSsl": "Disabled"
+            },
+            "previewLimit": 50,
+            "server": "localhost",
+            "port": 3306,
+            "driver": "MySQL",
+            "database": "bmagbook",
+            "name": "demo",
+            "password": "admin",
+            "username": "root"
+        }
+    ]
+}
