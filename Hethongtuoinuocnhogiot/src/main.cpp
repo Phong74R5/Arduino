@@ -4,7 +4,7 @@
 #include <Servo.h>
 Servo vannuoc;
 char state;
-int doamchuan = 60;
+float doamchuan = 60;
 LiquidCrystal lcd(12, 11, 7, 6, 5, 4);
 const int PINDHT = 3;
 const int DHTTYPE = DHT11;
@@ -48,8 +48,12 @@ void loop()
   float nhietdo = dht.readTemperature();
   lcd.setCursor(0, 0);
   lcd.print("Do am:");
-  lcd.setCursor(8, 0);
+  lcd.setCursor(7, 0);
   lcd.print(doam);
+  lcd.setCursor(11,0);
+  lcd.print("|");
+  lcd.setCursor(12,0);
+  lcd.print(doamchuan);
   lcd.setCursor(0, 1);
   lcd.print("Nhiet do:");
   lcd.setCursor(10, 1);
