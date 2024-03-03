@@ -4,7 +4,7 @@
 #include <Servo.h>
 Servo vannuoc;
 char state;
-float doamchuan = 60;
+int doamchuan = 60;
 LiquidCrystal lcd(12, 11, 7, 6, 5, 4);
 const int PINDHT = 3;
 const int DHTTYPE = DHT11;
@@ -17,13 +17,12 @@ void setup()
   Serial.begin(9600);
   dht.begin();
   lcd.begin(16, 2);
-  
 }
 void loop()
 {
   if (Serial.available() > 0)
   {
-    // Đọc giá trị nhận được từ bluetooth
+    // doc gia tri nhan duoc tu bluetooh
     state = Serial.read();
   }
   else
@@ -35,29 +34,34 @@ void loop()
   switch (state)
   {
   case '+':
-    doamchuan++;
+    if (doamchuan < 80)
+      doamchuan++;
     break;
   case '-':
-    doamchuan--;
+    if (doamchuan > 20)
+      doamchuan--;
     break;
   default:
     break;
   }
 
-  float doam = dht.readHumidity();
+  int doam = dht.readHumidity();
   float nhietdo = dht.readTemperature();
+  //*hien thi tren LCD
   lcd.setCursor(0, 0);
   lcd.print("Do am:");
   lcd.setCursor(7, 0);
   lcd.print(doam);
-  lcd.setCursor(11,0);
+  lcd.setCursor(11, 0);
   lcd.print("|");
-  lcd.setCursor(12,0);
+  lcd.setCursor(12, 0);
   lcd.print(doamchuan);
   lcd.setCursor(0, 1);
   lcd.print("Nhiet do:");
   lcd.setCursor(10, 1);
   lcd.print(nhietdo);
+  //*
+  //*dieu chinh van nuoc
   int goc = map(doam, 20, doamchuan, 180, 0);
   if (nhietdo >= 32)
   {
